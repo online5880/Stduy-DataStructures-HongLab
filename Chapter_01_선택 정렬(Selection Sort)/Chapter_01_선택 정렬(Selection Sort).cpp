@@ -44,6 +44,7 @@ void Print(Element* arr, int size)
 
 int main()
 {
+	/*
 	// 3개 정렬
 	{
 		for (int k = 0; k < 3; k++)
@@ -82,9 +83,9 @@ int main()
 					cout << CheckSorted(arr, size); // 정렬 되었나 확인
 					cout << endl;
 				}
-	}
+	}*/
 
-	return 0; // <- 실습용 임시
+	
 
 	// 5개라면? 더 많다면?
 	{
@@ -97,49 +98,80 @@ int main()
 		// 100개라면?
 	}
 
+	/*
 	// 가장 작은 수 찾기
 	{
 		int arr[] = { 8, 3, 2, 5, 1, 1, 2, 5, 8, 9 }; // 임의의 숫자들, 변경 가능
-		int size = sizeof(arr) / sizeof(arr[0]);
+		const int size = std::size(arr);
 
 		assert(size > 0); // size가 1이상이라고 가정
 
 		// TODO:
+		int min_number = arr[0];
+		for(int i = 0; i< size-1; ++i)
+		{
+			min_number = min_number > arr[i] ? arr[i] : min_number;
+			//min_number = min(arr[i], min_number);
+		}
 
-		// cout << "Minimum number is " << min_number << endl;
+		cout << "Minimum number is " << min_number << endl;
 	}
+	*/
 
+	/*
 	// 가장 작은 수의 인덱스 찾기
 	{
-		int arr[] = { 8, 3, 2, 5, 1, 1, 2, 5, 8, 9 };
-		int size = sizeof(arr) / sizeof(arr[0]);
+		const int arr[] = { 8, 3, 2, 5, 1, 1, 2, 5, 8, 9 };
+		const int size = std::size(arr);
 
 		assert(size > 0); // size가 1이상이라고 가정
 
 		// TODO:
+		int min_index = 0;
+		for(int i = 0; i<size; ++i)
+		{
+			if(arr[i] < arr[min_index])
+			{
+				min_index = i;
+			}
+		}
 
-		//cout << "The index of min is " << min_index << endl;
-		//cout << "Minimum number is " << arr[min_index] << endl;
+		cout << "The index of min is " << min_index << endl;
+		cout << "Minimum number is " << arr[min_index] << endl;
+
+
 	}
+	*/
 
 	// Selection Sort
 	// 힌트: swap()
 	{
 		int arr[] = { 8, 3, 2, 5, 1, 1, 2, 5, 8, 9 };
-		int size = sizeof(arr) / sizeof(arr[0]);
+		const int size = std::size(arr);
 
-		int min_index;
+		int min_index = arr[0];
 		for (int i = 0; i < size - 1; i++)
 		{
-
 			// TODO:
+			min_index = i;
+			for(int j = i+1; j < size; ++j)
+			{
+				if(arr[j] < arr[min_index])
+				{
+					min_index = j;
+				}
+			}
+			swap(arr[i], arr[min_index]);
 
 			Print(arr, size);
 
 			cout << boolalpha;
 			cout << CheckSorted(arr, size);
 			cout << endl;
+			if (CheckSorted(arr, size)) { break; }
 		}
+
+		return 0; // <- 실습용 임시
 	}
 
 	// 비교 횟수 세보기, 더 효율적인 방법은 없을까?
