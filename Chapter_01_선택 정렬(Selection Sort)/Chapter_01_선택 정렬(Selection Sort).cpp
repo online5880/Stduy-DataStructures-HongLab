@@ -143,6 +143,7 @@ int main()
 	}
 	*/
 
+	/*
 	// Selection Sort
 	// 힌트: swap()
 	{
@@ -169,11 +170,11 @@ int main()
 			cout << CheckSorted(arr, size);
 			cout << endl;
 			if (CheckSorted(arr, size)) { break; }
-		}
-
-		return 0; // <- 실습용 임시
+		} 
 	}
+	*/
 
+	/*
 	// 비교 횟수 세보기, 더 효율적인 방법은 없을까?
 	// https://en.wikipedia.org/wiki/Sorting_algorithm
 	{
@@ -187,6 +188,21 @@ int main()
 			}
 
 			//TODO: count ++;
+			int min_index;
+			for(int i = 0; i<size-1; ++i)
+			{
+				min_index = i;
+				for(int j = i+1; j<size; ++j)
+				{
+					count++;
+
+					if(arr[j] < arr[min_index])
+					{
+						min_index = j;
+					}
+				}
+				swap(arr[i], arr[min_index]);
+			}
 
 			//cout << size << ", " << count << endl;
 			ofile << size << ", " << count << endl;
@@ -197,6 +213,7 @@ int main()
 
 		ofile.close();
 	}
+	*/
 
 	// [2, 2, 1]
 	// [1, 2, 2] // 첫 2가 마지막으로 이동
@@ -204,12 +221,27 @@ int main()
 	// 안정성 확인(unstable)
 	{
 		Element arr[] = { {2, 'a'}, {2, 'b'}, {1, 'c'} };
-		int size = sizeof(arr) / sizeof(arr[0]);
+		int size = std::size(arr);
 
 		Print(arr, size); // arr이 Element의 배열
 
 		// TODO:
+		int min_index;
+		for(int i = 0; i<size-1; ++i)
+		{
+			min_index = i;
+			for(int j = i+1; j<size; ++j)
+			{
+				if(arr->key < arr[min_index].key)
+				{
+					min_index = j;
+				}
+			}
+			swap(arr[i], arr[min_index]);
+		}
 
 		Print(arr, size); // arr이 Element의 배열
 	}
+
+	return 0; // <- 실습용 임시
 }
